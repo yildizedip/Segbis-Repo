@@ -3,5 +3,8 @@
 	<persistence-unit name="SegbisJpaWithHibernate">
 		<class>model.SgbKullanici</class>
 		<class>model.SgbKullaniciDetay</class>
+		<class>model.SgbKullaniciRol</class>
+		<class>model.SgbMenu</class>
+		<class>model.SgbRol</class>
 	</persistence-unit>
 </persistence>

@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -27,6 +28,10 @@ public class SgbKullanici implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="kullaniciDetay_id")
 	private SgbKullaniciDetay sgbKullaniciDetay;
+
+	//bi-directional many-to-one association to SgbKullaniciRol
+	@OneToMany(mappedBy="sgbKullanici")
+	private List<SgbKullaniciRol> sgbKullaniciRols;
 
 	public SgbKullanici() {
 	}
@@ -69,6 +74,28 @@ public class SgbKullanici implements Serializable {
 
 	public void setSgbKullaniciDetay(SgbKullaniciDetay sgbKullaniciDetay) {
 		this.sgbKullaniciDetay = sgbKullaniciDetay;
+	}
+
+	public List<SgbKullaniciRol> getSgbKullaniciRols() {
+		return this.sgbKullaniciRols;
+	}
+
+	public void setSgbKullaniciRols(List<SgbKullaniciRol> sgbKullaniciRols) {
+		this.sgbKullaniciRols = sgbKullaniciRols;
+	}
+
+	public SgbKullaniciRol addSgbKullaniciRol(SgbKullaniciRol sgbKullaniciRol) {
+		getSgbKullaniciRols().add(sgbKullaniciRol);
+		sgbKullaniciRol.setSgbKullanici(this);
+
+		return sgbKullaniciRol;
+	}
+
+	public SgbKullaniciRol removeSgbKullaniciRol(SgbKullaniciRol sgbKullaniciRol) {
+		getSgbKullaniciRols().remove(sgbKullaniciRol);
+		sgbKullaniciRol.setSgbKullanici(null);
+
+		return sgbKullaniciRol;
 	}
 
 }
